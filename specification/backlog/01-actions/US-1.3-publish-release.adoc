@@ -1,0 +1,17 @@
+[[US-1.3]]
+=== US-1.3 Release with notes, assets and checksums
+
+Status:: Done (0.1.0) +
+Effort:: 2 h +
+Traces to:: <<TS-1.3>>, <<FR-1.3>>
+
+As the maintainer, I want the release created from the dated release notes with all assets and
+their checksums, so that every release looks the same and can be verified.
+
+.Acceptance criteria
+. FR-1.3 holds; undated notes stop the release before anything is published.
+
+.Test criteria
+* Integration test (`test/publish_test.sh`, Docker, dry run): the gh call, checksums,
+  pre-release flag, rendered release text, and the failures for undated or missing notes,
+  unmatched patterns, directories and duplicate names.

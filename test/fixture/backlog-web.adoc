@@ -1,0 +1,3 @@
+= Fixture – Backlog
+
+include::specification/backlog/01-core/index.adoc[]

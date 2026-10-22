@@ -1,0 +1,3 @@
+== Core
+
+include::US-1.1-greet.adoc[]

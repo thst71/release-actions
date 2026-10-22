@@ -1,0 +1,8 @@
+= release-actions – Requirements Specification
+:toc: left
+:toclevels: 3
+:sectnums:
+
+Functional and non-functional requirements of `release-actions`, derived from `SPEC.md`.
+
+include::specification/requirements/01-release/index.adoc[]

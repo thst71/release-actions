@@ -1,0 +1,12 @@
+== Actions
+
+Composite actions, each a thin `action.yml` around a bash script that takes its inputs from the
+environment, so that the tests can call the scripts directly.
+
+include::TS-1.1-verify-release-tag.adoc[]
+
+include::TS-1.2-render-docs.adoc[]
+
+include::TS-1.3-publish-release.adoc[]
+
+include::TS-1.4-workflow.adoc[]

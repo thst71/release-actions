@@ -1,0 +1,5 @@
+== Core
+
+include::FR-1.1-greet.adoc[]
+
+include::FR-1.2-wave.adoc[]

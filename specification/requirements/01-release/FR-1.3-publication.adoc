@@ -1,0 +1,16 @@
+[[FR-1.3]]
+=== FR-1.3 Publication
+
+.Acceptance criteria
+. The release notes `specification/release-notes/<version>.adoc` (or a given file) must start
+  with the heading `== <version> (YYYY-MM-DD)`; otherwise the release fails.
+. The release text is the notes without that heading, rendered to HTML, with references
+  replaced by their IDs or texts.
+. The release `v<version>` is created for the existing tag with the title
+  `<repository> <version>`, marked as pre-release when the version is one, with the given
+  assets and a `checksums.txt` (SHA-256, `<sum>  <name>`) over them.
+. A pattern matching nothing, a match that is not a file and two assets with the same name
+  fail the release.
+
+Stakeholder need:: SPEC.md §1.6 +
+Effort:: 2 h

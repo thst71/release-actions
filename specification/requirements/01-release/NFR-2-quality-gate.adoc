@@ -1,0 +1,10 @@
+[[NFR-2]]
+=== NFR-2 Quality gate
+
+.Acceptance criteria
+. `task check` runs actionlint, shellcheck, the tests of the three actions and the validation
+  of this specification; CI runs it for every push.
+. The scripts run with bash 3.2 (macOS) and bash 5 (runners).
+
+Stakeholder need:: SPEC.md §1.1 +
+Effort:: 1 h

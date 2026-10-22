@@ -1,0 +1,15 @@
+[[TS-1.2]]
+=== TS-1.2 render-docs
+
+Implements <<FR-1.2>> and <<NFR-1>>.
+
+* Inputs `version` (required), `validator` (command, default the agent-skills launcher
+  `.agents/skills/spec-system/bin/validate-specs`), `image`, `output` (default `dist-docs`);
+  output `files` (HTML files and zip, one per line).
+* `render.sh`: masters from `<validator> -masters`; per master
+  `asciidoctor-reducer -o <output>/flat/<master>`; then `<validator> -link <output>/flat`; per
+  master `asciidoctor -r asciidoctor-diagram -a data-uri -a revnumber=<version> -v
+  --failure-level INFO -B <source dir of the master>` into `<output>/html/<master>.html`.
+* The container runs as the calling user, with the sources mounted read-only and diagram files
+  and caches in the container's `/tmp`; `zip -r` bundles `html/` as `docs-<version>.zip`;
+  `flat/` is removed.

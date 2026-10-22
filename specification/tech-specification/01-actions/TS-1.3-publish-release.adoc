@@ -1,0 +1,14 @@
+[[TS-1.3]]
+=== TS-1.3 publish-release
+
+Implements <<FR-1.3>> and <<NFR-1>>.
+
+* Inputs `version` (required), `prerelease`, `assets` (globs, one per line), `notes`, `title`,
+  `image`, `token` (default `github.token`).
+* `publish.sh`: the first `==` heading of the notes must be `== <version> (YYYY-MM-DD)`; the
+  notes without it, with `+<<ID,text>>+` → text and `+<<ID>>+` → ID, are rendered by
+  `asciidoctor -s` in the pinned image to the release text.
+* Globs expand with `nullglob`; every match must be a file; duplicate base names fail;
+  `checksums.txt` lists `sha256sum` (or `shasum -a 256`) per asset by base name.
+* `gh release create v<version> --verify-tag --title … --notes-file … [--prerelease] <assets>
+  checksums.txt`; `DRY_RUN=1` prints the call, the checksums and the release text.

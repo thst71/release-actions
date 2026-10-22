@@ -1,0 +1,63 @@
+name: release
+
+on:
+  push:
+    tags: ["v[0-9]+.[0-9]+.[0-9]+*"]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    environment: release
+    outputs:
+      version: ${{ steps.tag.outputs.version }}
+      prerelease: ${{ steps.tag.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: tag
+        uses: ./verify-release-tag
+        with:
+          allowed-signers: ${{ secrets.RELEASE_ALLOWED_SIGNERS }}
+
+  docs:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: false
+      - run: go install github.com/thst71/spec-validator/cmd/spec-validator@261aae5f836d76b9726949ce449a42f3bc93f658
+      - uses: ./render-docs
+        with:
+          version: ${{ needs.verify.outputs.version }}
+          validator: spec-validator
+      - uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: |
+            dist-docs/html/*.html
+            dist-docs/*.zip
+
+  publish:
+    needs: [verify, docs]
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: docs
+          path: dist-docs
+      - uses: ./publish-release
+        with:
+          version: ${{ needs.verify.outputs.version }}
+          prerelease: ${{ needs.verify.outputs.prerelease }}
+          assets: |
+            dist-docs/html/*.html
+            dist-docs/*.zip

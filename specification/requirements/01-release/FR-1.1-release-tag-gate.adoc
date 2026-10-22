@@ -1,0 +1,14 @@
+[[FR-1.1]]
+=== FR-1.1 Release tag gate
+
+.Acceptance criteria
+. The release workflow starts only for tags matching `v[0-9]+.[0-9]+.[0-9]+*`; other tags start
+  nothing.
+. The release fails, with a message naming the reason, when the tag is not
+  `v<major>.<minor>.<patch>[-pre][+build]`, not annotated, not SSH-signed, signed by a key
+  outside the allowed signers, or signed by a principal other than the tagger's email.
+. The release fails when the allowed signers are empty (secret not set).
+. A passing tag yields the version without `v` and whether it is a pre-release.
+
+Stakeholder need:: SPEC.md §1.1, §1.2, §1.3, §1.4 +
+Effort:: 3 h

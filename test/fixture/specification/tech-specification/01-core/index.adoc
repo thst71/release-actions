@@ -1,0 +1,3 @@
+== Core
+
+include::TS-1.1-greeter.adoc[]

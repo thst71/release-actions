@@ -1,0 +1,40 @@
+name: Publish release
+description: >-
+  Creates the GitHub release for a verified tag: the release text from the version's release
+  notes, the assets and a checksums.txt over all of them.
+inputs:
+  version:
+    description: The version without the leading v (from verify-release-tag).
+    required: true
+  prerelease:
+    description: true for a pre-release (from verify-release-tag).
+    default: "false"
+  assets:
+    description: Files to attach, one glob per line.
+    default: ""
+  notes:
+    description: The release notes of this version; default specification/release-notes/<version>.adoc.
+    default: ""
+  title:
+    description: The release title; default "<repository name> <version>".
+    default: ""
+  image:
+    description: The asciidoctor image that renders the release text, pinned.
+    default: asciidoctor/docker-asciidoctor:1.108.0@sha256:66041d57c25cec8b54cbf8b13141a83c3cb4768d41ccb3683cab28271c6775df
+  token:
+    description: Token with contents write permission.
+    default: ${{ github.token }}
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+        PRERELEASE: ${{ inputs.prerelease }}
+        ASSETS: ${{ inputs.assets }}
+        NOTES: ${{ inputs.notes }}
+        TITLE: ${{ inputs.title }}
+        IMAGE: ${{ inputs.image }}
+        GH_TOKEN: ${{ inputs.token }}
+        REPOSITORY: ${{ github.repository }}
+      run: '"$GITHUB_ACTION_PATH/publish.sh"'

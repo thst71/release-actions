@@ -1,0 +1,11 @@
+== Release
+
+include::FR-1.1-release-tag-gate.adoc[]
+
+include::FR-1.2-documentation.adoc[]
+
+include::FR-1.3-publication.adoc[]
+
+include::NFR-1-trust.adoc[]
+
+include::NFR-2-quality-gate.adoc[]

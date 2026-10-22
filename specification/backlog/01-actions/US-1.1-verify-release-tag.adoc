@@ -1,0 +1,18 @@
+[[US-1.1]]
+=== US-1.1 Only my signed tags release
+
+Status:: Done (0.1.0) +
+Effort:: 3 h +
+Traces to:: <<TS-1.1>>, <<TS-1.4>>, <<FR-1.1>>, <<NFR-1>>
+
+As the maintainer, I want a release to start only from a tag I signed, so that I release
+offline and nobody else can.
+
+.Acceptance criteria
+. Every rule of FR-1.1 holds, each with its own message.
+. The allowed signers come from the environment secret and do not remain on the runner.
+
+.Test criteria
+* Component test (`test/verify_test.sh`): a repository with tags signed by throw-away ed25519
+  keys: signed release, pre-release, build metadata, unsigned annotated, lightweight, foreign
+  key, signer not the tagger, non-semver name, missing signers.

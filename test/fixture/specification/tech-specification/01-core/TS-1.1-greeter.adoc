@@ -1,0 +1,9 @@
+[[TS-1.1]]
+=== TS-1.1 Greeter
+
+Implements <<FR-1.1>> and <<FR-1.2,waving>>.
+
+[plantuml]
+----
+Alice -> Bob: hello
+----

@@ -1,0 +1,27 @@
+name: Verify release tag
+description: >-
+  Fails unless the tag is a release tag: named v<semver>, annotated, and SSH-signed by a principal
+  of the allowed signers that matches the tagger. Run it after actions/checkout.
+inputs:
+  allowed-signers:
+    description: Content of an OpenSSH allowed_signers file; pass the environment secret RELEASE_ALLOWED_SIGNERS.
+    required: true
+  tag:
+    description: The tag to verify.
+    default: ${{ github.ref_name }}
+outputs:
+  version:
+    description: The version without the leading v.
+    value: ${{ steps.verify.outputs.version }}
+  prerelease:
+    description: true when the version has a pre-release part (1.2.0-rc.1).
+    value: ${{ steps.verify.outputs.prerelease }}
+runs:
+  using: composite
+  steps:
+    - id: verify
+      shell: bash
+      env:
+        ALLOWED_SIGNERS: ${{ inputs.allowed-signers }}
+        TAG: ${{ inputs.tag }}
+      run: '"$GITHUB_ACTION_PATH/verify.sh"'

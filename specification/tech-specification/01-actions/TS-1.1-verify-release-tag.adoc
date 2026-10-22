@@ -1,0 +1,14 @@
+[[TS-1.1]]
+=== TS-1.1 verify-release-tag
+
+Implements <<FR-1.1>> and <<NFR-1>>.
+
+* Inputs `allowed-signers` (required), `tag` (default `github.ref_name`); outputs `version`,
+  `prerelease`.
+* `verify.sh`: semver regex on the name; `git fetch --force origin refs/tags/<tag>:refs/tags/<tag>`
+  (actions/checkout may have stored a lightweight tag); `git cat-file -t` must be `tag`; the
+  tag object must contain `-----BEGIN SSH SIGNATURE-----`.
+* The allowed signers go to a `mktemp` file in `RUNNER_TEMP`, removed by an exit trap;
+  `git -c gpg.ssh.allowedSignersFile=<file> verify-tag` must succeed, and the principal of its
+  `Good "git" signature for <principal>` line must equal `%(taggeremail:trim)`.
+* `prerelease` is true when the version before any `+build` part contains `-`.

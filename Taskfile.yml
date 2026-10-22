@@ -1,0 +1,24 @@
+version: '3'
+
+vars:
+  SCRIPTS: verify-release-tag/verify.sh render-docs/render.sh publish-release/publish.sh test/verify_test.sh test/publish_test.sh test/render_test.sh
+
+tasks:
+  lint:
+    cmds:
+      - actionlint
+      - shellcheck {{.SCRIPTS}}
+  test:
+    desc: The render and publish tests need Docker and spec-validator.
+    cmds:
+      - bash test/verify_test.sh
+      - bash test/publish_test.sh
+      - bash test/render_test.sh
+  validate-specs:
+    cmds:
+      - .agents/skills/spec-system/bin/validate-specs
+  check:
+    cmds:
+      - task: lint
+      - task: test
+      - task: validate-specs

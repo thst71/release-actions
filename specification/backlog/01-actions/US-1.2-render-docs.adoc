@@ -1,0 +1,18 @@
+[[US-1.2]]
+=== US-1.2 Documentation as HTML files
+
+Status:: Done (0.1.0) +
+Effort:: 3 h +
+Traces to:: <<TS-1.2>>, <<FR-1.2>>
+
+As a reader of a release, I want each master as one HTML file with working links to the other
+masters, so that I can read the documentation of exactly that version offline.
+
+.Acceptance criteria
+. FR-1.2 holds for a project with four masters, references across masters and a PlantUML
+  diagram.
+
+.Test criteria
+* Integration test (`test/render_test.sh`, Docker): the fixture project renders; links across
+  and within masters, own ids for dotted IDs, the embedded diagram, the zip and the `files`
+  output are checked.

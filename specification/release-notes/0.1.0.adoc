@@ -1,0 +1,12 @@
+== 0.1.0 (unreleased)
+
+First version.
+
+=== Features
+
+* `verify-release-tag`: releases only from annotated `v<semver>` tags SSH-signed by an allowed
+  signer who is the tagger (<<US-1.1>>, <<FR-1.1>>).
+* `render-docs`: every master as one HTML file with links between the masters, plus a zip
+  (<<US-1.2>>, <<FR-1.2>>).
+* `publish-release`: the release from the dated notes with assets and `checksums.txt`
+  (<<US-1.3>>, <<FR-1.3>>).

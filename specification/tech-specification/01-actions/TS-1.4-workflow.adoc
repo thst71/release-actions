@@ -1,0 +1,15 @@
+[[TS-1.4]]
+=== TS-1.4 Release workflow and repository
+
+Implements <<FR-1.1>>, <<NFR-1>> and <<NFR-2>>.
+
+* Trigger `push: tags: ["v[0-9]+.[0-9]+.[0-9]+*"]`, `permissions: contents: read`.
+* Jobs: `verify` (environment `release`, verify-release-tag), the project's build and
+  `render-docs` after it, `publish` (environment `release`, `contents: write`) after all.
+  Artifacts move between the jobs with upload/download-artifact.
+* This repository releases itself with its own actions by local path (`uses: ./…`).
+* `Taskfile.yml`: `lint` = actionlint + shellcheck, `test` = the three test scripts,
+  `validate-specs` = the agent-skills launcher, `check` = all; CI installs spec-validator and
+  actionlint with `go install` at pinned versions.
+* Repository setup (environment, secret, tag ruleset) is the `setup-repository.sh` of the
+  agent-skills `release` skill.

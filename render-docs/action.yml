@@ -1,0 +1,32 @@
+name: Render docs
+description: >-
+  Renders every master of the modular AsciiDoc specification into one HTML file, with links
+  between the masters, and bundles them as docs-<version>.zip. Needs Docker and spec-validator.
+inputs:
+  version:
+    description: The version shown in the documents (revnumber).
+    required: true
+  validator:
+    description: Command that runs spec-validator, split at blanks.
+    default: .agents/skills/spec-system/bin/validate-specs
+  image:
+    description: The asciidoctor image, pinned.
+    default: asciidoctor/docker-asciidoctor:1.108.0@sha256:66041d57c25cec8b54cbf8b13141a83c3cb4768d41ccb3683cab28271c6775df
+  output:
+    description: Directory for the HTML files and the zip.
+    default: dist-docs
+outputs:
+  files:
+    description: The HTML files and the zip, one path per line.
+    value: ${{ steps.render.outputs.files }}
+runs:
+  using: composite
+  steps:
+    - id: render
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+        VALIDATOR: ${{ inputs.validator }}
+        IMAGE: ${{ inputs.image }}
+        OUTPUT: ${{ inputs.output }}
+      run: '"$GITHUB_ACTION_PATH/render.sh"'

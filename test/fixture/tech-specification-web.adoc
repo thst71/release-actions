@@ -1,0 +1,3 @@
+= Fixture – Technical Specification
+
+include::specification/tech-specification/01-core/index.adoc[]

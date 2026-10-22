@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      SPEC_VALIDATOR: spec-validator
+      VALIDATOR: spec-validator
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: false
+      - name: Install spec-validator and actionlint
+        run: |
+          go install github.com/thst71/spec-validator/cmd/spec-validator@261aae5f836d76b9726949ce449a42f3bc93f658
+          go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
+      - uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: task check

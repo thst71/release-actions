@@ -1,0 +1,8 @@
+= release-actions – Technical Specification
+:toc: left
+:toclevels: 3
+:sectnums:
+
+Design of `release-actions`; every item traces to the requirements.
+
+include::specification/tech-specification/01-actions/index.adoc[]

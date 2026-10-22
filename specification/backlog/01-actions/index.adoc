@@ -1,0 +1,7 @@
+== Actions
+
+include::US-1.1-verify-release-tag.adoc[]
+
+include::US-1.2-render-docs.adoc[]
+
+include::US-1.3-publish-release.adoc[]

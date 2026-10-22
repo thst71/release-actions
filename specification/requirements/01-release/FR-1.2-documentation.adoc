@@ -1,0 +1,12 @@
+[[FR-1.2]]
+=== FR-1.2 Release documentation
+
+.Acceptance criteria
+. Every master listed by `spec-validator -masters` becomes one HTML file with embedded images
+  and diagrams and the version as revnumber.
+. References to anchors of another master link to that master's HTML file.
+. Any Asciidoctor warning or unresolved reference fails the rendering.
+. A zip `docs-<version>.zip` holds all HTML files with their relative paths.
+
+Stakeholder need:: SPEC.md §1.5 +
+Effort:: 3 h
