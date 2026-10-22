@@ -1,0 +1,13 @@
+== Release v0.2.0 (unreleased)
+
+Built with agent-skills v0.1.0.
+
+=== Breaking Changes
+
+* `publish-release` requires the heading `== Release v<version> (YYYY-MM-DD)` instead of
+  `== <version> (YYYY-MM-DD)`, and, when `.agents/skills/VERSION` exists, the line
+  `Built with agent-skills v<version>.` (<<US-1.4>>, <<FR-1.3>>).
+
+=== Documentation
+
+* The release notes have no section numbers; headings read "Release v<version> (<date>)".

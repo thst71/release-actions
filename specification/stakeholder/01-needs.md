@@ -12,3 +12,6 @@
    file, with links between the masters, and all of them as a zip.
 6. The release text is the version's release notes; notes still marked `(unreleased)` stop the
    release. A `checksums.txt` covers all assets.
+7. Release notes are read as a web page. Their headings say `Release v<version> (<date>)`
+   without chapter numbers ("2. 0.1.0" was easy to misread), and each version names the
+   agent-skills version it was built with.

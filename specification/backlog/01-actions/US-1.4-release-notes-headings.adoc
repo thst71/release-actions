@@ -1,0 +1,21 @@
+[[US-1.4]]
+=== US-1.4 Unmistakable release headings with the library version
+
+Status:: Done (0.2.0) +
+Effort:: 1.5 h +
+Traces to:: <<TS-1.3>>, <<FR-1.3>>
+
+As a reader of release notes, I want headings like "Release v0.1.0 (2026-10-09)" and the
+agent-skills version of each build, so that I neither misread a chapter number as part of the
+version nor guess which workflow built a release.
+
+.Acceptance criteria
+. publish-release accepts only `== Release v<version> (YYYY-MM-DD)` and names the expected
+  heading otherwise.
+. With `.agents/skills/VERSION`, the line `Built with agent-skills v<version>.` is required and
+  must match; without the file, it is not checked.
+. The release-notes master of this repository has no section numbers.
+
+.Test criteria
+* Integration test (`test/publish_test.sh`): new heading, old heading, undated heading, line
+  present, line missing, other library version, no version file.

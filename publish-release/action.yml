@@ -1,7 +1,8 @@
 name: Publish release
 description: >-
   Creates the GitHub release for a verified tag: the release text from the version's release
-  notes, the assets and a checksums.txt over all of them.
+  notes (heading "== Release v<version> (YYYY-MM-DD)", line "Built with agent-skills v<version>."
+  when .agents/skills/VERSION exists), the assets and a checksums.txt over all of them.
 inputs:
   version:
     description: The version without the leading v (from verify-release-tag).

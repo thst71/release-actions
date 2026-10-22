@@ -12,7 +12,7 @@ it, and the pipeline does the rest. No click on github.com.
 
 ## How a Release Works
 
-1. Locally: date the release notes (`== 1.2.0 (2026-10-22)`), commit, then `git tag -a v1.2.0 -m "…"` (signed automatically with `tag.gpgSign = true`) and `git push origin main v1.2.0`.
+1. Locally: date the release notes (`== Release v1.2.0 (2026-10-22)`, with the line `Built with agent-skills v<version>.` below), commit, then `git tag -a v1.2.0 -m "…"` (signed automatically with `tag.gpgSign = true`) and `git push origin main v1.2.0`.
 2. The release workflow starts for tags matching `v[0-9]+.[0-9]+.[0-9]+*`; all other tags are free for other uses.
 3. `verify` (environment `release`) checks the signature against the secret `RELEASE_ALLOWED_SIGNERS`; the project's build, the gate and `render-docs` follow; `publish` (environment `release`, `contents: write`) creates the release.
 

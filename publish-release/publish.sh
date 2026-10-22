@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Publishes the release v$VERSION: checks that the release notes are dated, renders them as the
-# release text, writes checksums.txt over the assets and calls gh release create. DRY_RUN=1
-# prints the gh call instead.
+# Publishes the release v$VERSION: checks that the release notes are dated and name the
+# agent-skills version of the build, renders them as the release text, writes checksums.txt over
+# the assets and calls gh release create. DRY_RUN=1 prints the gh call instead.
 set -euo pipefail
 
 fail() {
@@ -12,8 +12,15 @@ fail() {
 notes=${NOTES:-specification/release-notes/$VERSION.adoc}
 [[ -f "$notes" ]] || fail "release notes $notes are missing"
 heading=$(grep -m 1 '^== ' "$notes" || true)
-[[ "$heading" == "== $VERSION ("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]")" ]] ||
-	fail "the first heading of $notes must be '== $VERSION (YYYY-MM-DD)', not '$heading'"
+[[ "$heading" == "== Release v$VERSION ("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]")" ]] ||
+	fail "the first heading of $notes must be '== Release v$VERSION (YYYY-MM-DD)', not '$heading'"
+
+# The vendored agent-skills library knows its version since vendor.sh writes it.
+library=${LIBRARY_VERSION_FILE:-.agents/skills/VERSION}
+if [[ -f "$library" ]]; then
+	built="Built with agent-skills v$(tr -d ' \r\n' <"$library")."
+	grep -qxF "$built" "$notes" || fail "$notes must contain the line '$built'"
+fi
 
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT

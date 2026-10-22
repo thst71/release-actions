@@ -1,5 +1,6 @@
 = release-actions – Release Notes
 :toc: left
-:sectnums:
+
+include::specification/release-notes/0.2.0.adoc[]
 
 include::specification/release-notes/0.1.0.adoc[]

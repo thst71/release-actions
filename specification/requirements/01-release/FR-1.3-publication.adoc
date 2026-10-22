@@ -3,8 +3,10 @@
 
 .Acceptance criteria
 . The release notes `specification/release-notes/<version>.adoc` (or a given file) must start
-  with the heading `== <version> (YYYY-MM-DD)`; otherwise the release fails.
-. The release text is the notes without that heading, rendered to HTML, with references
+  with the heading `== Release v<version> (YYYY-MM-DD)`; otherwise the release fails.
+. When the vendored library has a version file (`.agents/skills/VERSION`), the notes must
+  contain the line `Built with agent-skills v<library version>.`; otherwise the release fails.
+. The release text is the notes without the heading, rendered to HTML, with references
   replaced by their IDs or texts.
 . The release `v<version>` is created for the existing tag with the title
   `<repository> <version>`, marked as pre-release when the version is one, with the given
@@ -12,5 +14,5 @@
 . A pattern matching nothing, a match that is not a file and two assets with the same name
   fail the release.
 
-Stakeholder need:: SPEC.md §1.6 +
-Effort:: 2 h
+Stakeholder need:: SPEC.md §1.6, §1.7 +
+Effort:: 2.5 h
