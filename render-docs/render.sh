@@ -5,11 +5,11 @@
 # unresolved reference. Writes the file list to GITHUB_OUTPUT.
 set -euo pipefail
 
-read -r -a validator <<<"$VALIDATOR"
+read -r -a validate <<<"$VALIDATOR"
 masters=()
 while IFS= read -r master; do
 	[[ -n "$master" ]] && masters+=("$master")
-done < <("${validator[@]}" -masters)
+done < <("${validate[@]}" -masters)
 [[ ${#masters[@]} -gt 0 ]] || { echo "::error::spec-validator lists no masters" >&2; exit 1; }
 
 rm -rf "$OUTPUT"
@@ -24,7 +24,7 @@ for master in "${masters[@]}"; do
 	mkdir -p "$out/flat/$(dirname "$master")" "$out/html/$(dirname "$master")"
 	docker_run asciidoctor-reducer -o "/out/flat/$master" "$master"
 done
-"${validator[@]}" -link "$out/flat"
+"${validate[@]}" -link "$out/flat"
 
 files=()
 for master in "${masters[@]}"; do

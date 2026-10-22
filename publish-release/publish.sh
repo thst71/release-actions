@@ -24,7 +24,7 @@ docker run --rm -u "$(id -u):$(id -g)" -v "$work:/w" -w /w "$IMAGE" \
 	asciidoctor -s -a showtitle! -o notes.html notes.adoc
 
 shopt -s nullglob
-assets=()
+attachments=()
 while IFS= read -r pattern; do
 	[[ -z "$pattern" ]] && continue
 	# shellcheck disable=SC2206 # the pattern is a glob
@@ -33,13 +33,13 @@ while IFS= read -r pattern; do
 	for match in "${matches[@]}"; do
 		[[ -f "$match" ]] || fail "$match is not a file"
 	done
-	assets+=("${matches[@]}")
+	attachments+=("${matches[@]}")
 done <<<"$ASSETS"
 
-duplicate=$(for asset in ${assets[@]+"${assets[@]}"}; do basename "$asset"; done | sort | uniq -d | head -n 1)
+duplicate=$(for asset in ${attachments[@]+"${attachments[@]}"}; do basename "$asset"; done | sort | uniq -d | head -n 1)
 [[ -z "$duplicate" ]] || fail "two assets are named $duplicate"
 : >"$work/checksums.txt"
-for asset in ${assets[@]+"${assets[@]}"}; do
+for asset in ${attachments[@]+"${attachments[@]}"}; do
 	name=$(basename "$asset")
 	if command -v sha256sum >/dev/null; then
 		sum=$(sha256sum "$asset" | cut -d ' ' -f 1)
@@ -52,7 +52,7 @@ done
 command=(gh release create "v$VERSION" --repo "$REPOSITORY" --verify-tag
 	--title "${TITLE:-${REPOSITORY#*/} $VERSION}" --notes-file "$work/notes.html")
 [[ "$PRERELEASE" == true ]] && command+=(--prerelease)
-command+=(${assets[@]+"${assets[@]}"} "$work/checksums.txt")
+command+=(${attachments[@]+"${attachments[@]}"} "$work/checksums.txt")
 if [[ -n "${DRY_RUN:-}" ]]; then
 	printf '%q ' "${command[@]}"
 	echo
