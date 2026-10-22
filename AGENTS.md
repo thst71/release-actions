@@ -16,6 +16,7 @@ release-actions holds the GitHub Actions that release a project from a signed ta
 | Fix a defect | [fix-bug](.agents/skills/fix-bug/SKILL.md) |
 | Done check | [definition-of-done](.agents/skills/definition-of-done/SKILL.md) |
 | Commit | [commit](.agents/skills/commit/SKILL.md) |
+| Release | [release](.agents/skills/release/SKILL.md) |
 | Commands, test tooling | [toolchain](.agents/skills/toolchain/SKILL.md) |
 | Specification layout and rules | [spec-system](.agents/skills/spec-system/SKILL.md) |
 
