@@ -26,7 +26,7 @@ release-actions holds the GitHub Actions that release a project from a signed ta
 2. The project skills in `.agents/skills/`.
 3. Personal instructions and skills of the user (e.g. `~/.claude/skills`, `~/.agents/`). They may only cover the machine environment and how to communicate; they never override a project rule or a project skill of the same purpose.
 
-`.agents/skills/` is the vendored agent-skills library (`git subtree`); adapt it here, under "Project Facts", never by editing it. Update it with `git subtree pull --prefix .agents/skills git@thst71.github.com:thst71/agent-skills.git main --squash`.
+`.agents/skills/` is the vendored agent-skills library (version in `.agents/skills/VERSION`); adapt it here, under "Project Facts", never by editing it. Update it to a new version with `.agents/skills/vendor.sh v<version>`, then commit `chore(agents): vendor agent-skills v<version>`.
 
 ---
 
