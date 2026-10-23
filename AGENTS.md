@@ -40,6 +40,10 @@ release-actions holds the GitHub Actions that release a project from a signed ta
 
 Contract tasks in `Taskfile.yml`: `lint` (actionlint, shellcheck), `test` (the three scripts in `test/`), `validate-specs` (agent-skills launcher), `check`. There is no `format-check` and no `typecheck`.
 
+### Releases
+
+Releases follow the [release](.agents/skills/release/SKILL.md) skill; a real release is the test of the actions. The workflow template of agent-skills (`release/release.yml`) pins the actions by commit SHA. After a release with a `feat` or `fix` that the template needs, raise that pin; a release with only `docs` or `chore` changes leaves the pin as it is. Vendoring a new agent-skills version calls for no release of its own; it ships with the next one.
+
 ### Conventions
 
 - Each action is a composite `action.yml` that passes its inputs as environment variables to one bash script next to it; the logic lives in the script.
