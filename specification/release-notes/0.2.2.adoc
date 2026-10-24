@@ -1,0 +1,9 @@
+== Release v0.2.2 (unreleased)
+
+Built with agent-skills v0.4.0.
+
+=== Documentation
+
+* The specification validator is pinned in `.agents/spec-validator.lock` (spec-validator
+  0.1.1); CI and the release workflow install that version instead of a commit of their own
+  (<<TS-1.4>>).

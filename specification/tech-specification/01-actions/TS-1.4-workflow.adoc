@@ -9,7 +9,8 @@ Implements <<FR-1.1>>, <<NFR-1>> and <<NFR-2>>.
   Artifacts move between the jobs with upload/download-artifact.
 * This repository releases itself with its own actions by local path (`uses: ./…`).
 * `Taskfile.yml`: `lint` = actionlint + shellcheck, `test` = the three test scripts,
-  `validate-specs` = the agent-skills launcher, `check` = all; CI installs spec-validator and
-  actionlint with `go install` at pinned versions.
+  `validate-specs` = the agent-skills launcher, `check` = all; CI installs actionlint with
+  `go install` at a pinned version, and spec-validator at the version of
+  `.agents/spec-validator.lock`, which the launcher then runs and the render test uses.
 * Repository setup (environment, secret, tag ruleset) is the `setup-repository.sh` of the
   agent-skills `release` skill.

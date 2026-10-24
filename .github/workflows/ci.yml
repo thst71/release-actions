@@ -11,7 +11,6 @@ jobs:
   check:
     runs-on: ubuntu-latest
     env:
-      SPEC_VALIDATOR: spec-validator
       VALIDATOR: spec-validator
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +20,7 @@ jobs:
           cache: false
       - name: Install spec-validator and actionlint
         run: |
-          go install github.com/thst71/spec-validator/cmd/spec-validator@261aae5f836d76b9726949ce449a42f3bc93f658
+          go install "github.com/thst71/spec-validator/cmd/spec-validator@v$(awk '$1 == "version" { print $2 }' .agents/spec-validator.lock)"
           go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
       - uses: arduino/setup-task@v2
         with:

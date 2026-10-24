@@ -30,7 +30,7 @@ jobs:
         with:
           go-version: stable
           cache: false
-      - run: go install github.com/thst71/spec-validator/cmd/spec-validator@261aae5f836d76b9726949ce449a42f3bc93f658
+      - run: go install "github.com/thst71/spec-validator/cmd/spec-validator@v$(awk '$1 == "version" { print $2 }' .agents/spec-validator.lock)"
       - uses: ./render-docs
         with:
           version: ${{ needs.verify.outputs.version }}
