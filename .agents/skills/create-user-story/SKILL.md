@@ -8,6 +8,12 @@ description: >-
 
 Create implementable, atomic user stories with structured test pyramid criteria in modular item files. Layout, anchors, SMART criteria and test pyramid levels are defined in [spec-system](../spec-system/SKILL.md).
 
+## Reads
+
+- The technical specification items to cut into stories and the requirements they implement
+- The acceptance scenarios of those requirements (BDT): IDs and titles
+- The test limits in `AGENTS.md` and the test tooling of the component's toolchain profile
+
 ## Files Modified
 
 - `specification/backlog/<NN-chapter>/<ID>-<slug>.adoc` (one new file per story)
@@ -31,5 +37,5 @@ Create implementable, atomic user stories with structured test pyramid criteria 
    - Integration: which persistence or cross-module flows?
    - Blackbox: is a critical user journey affected?
 
-   Name what each test must show, specific enough to implement without ambiguity; a level that does not apply says why. Name the tooling from the component's toolchain profile and respect the project's limits in `AGENTS.md`.
+   Name what each test must show, specific enough to implement without ambiguity; a level that does not apply says why. If `AGENTS.md` names requirements-based blackbox testing (BDT), the blackbox level names the acceptance scenarios of the traced requirements (`<<AT-x.y>>`) instead of journeys; new ones come from [create-acceptance-scenarios](../create-acceptance-scenarios/SKILL.md). Name the tooling from the component's toolchain profile and respect the project's limits in `AGENTS.md`.
 5. **Verify**: Run the `validate-specs` task (see [toolchain](../toolchain/SKILL.md)).

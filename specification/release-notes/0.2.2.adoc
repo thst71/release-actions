@@ -1,6 +1,6 @@
 == Release v0.2.2 (unreleased)
 
-Built with agent-skills v0.4.0.
+Built with agent-skills v0.8.0.
 
 === Documentation
 

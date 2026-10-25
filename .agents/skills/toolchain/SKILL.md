@@ -15,13 +15,14 @@ Each project exposes these tasks through its task runner. Spelling may follow th
 | Task | Required | Does |
 |---|---|---|
 | `check` | yes | the quality gate: everything below that the project has, in one command; fails on any error or warning |
-| `test` | yes | the full test suite |
+| `test` | yes | the full test suite; records the execution time of every test in a report the profile names (see [spec-system](../spec-system/SKILL.md), Test Pyramid) |
 | `lint` | yes | static analysis |
 | `format-check` | if a formatter is used | formatting verification without changing files |
 | `typecheck` | if the language has a separate type check | type check or compilation |
 | `validate-specs` | if the project uses the [spec-system](../spec-system/SKILL.md) | anchors, includes, traceability |
 | `dist` | if the project releases artifacts | builds the release artifacts into `dist/` (see [release](../release/SKILL.md)) |
 | `version` | if the version lives in a file | prints the project version, so that a release can compare it with the tag |
+| `bdt` | if `AGENTS.md` names requirements-based blackbox testing | runs the acceptance scenarios against the built product and writes Cucumber JSON to `build/bdt/cucumber.json` (see [spec-system](../spec-system/SKILL.md), BDT); not part of `check` |
 
 Dependency installation and running a single test level are not tasks; the profile names the commands. Each profile also lists its `Release Build`: the workflow steps that set up the toolchain and run `check` and `dist` in the release pipeline.
 
