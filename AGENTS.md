@@ -38,7 +38,7 @@ release-actions holds the GitHub Actions that release a project from a signed ta
 |---|---|
 | `.` (`*/action.yml`, `*/*.sh`, `test/`) | none; the commands below |
 
-Contract tasks in `Taskfile.yml`: `lint` (actionlint, shellcheck), `test` (the three scripts in `test/`), `validate-specs` (agent-skills launcher), `check`. There is no `format-check` and no `typecheck`. Deviation from the contract: `test` writes no report with the time of each test. The scripts have no test runner and print `ok` or `FAIL` per case; bash 3.2 on macOS measures whole seconds only, which tells nothing about these cases.
+Contract tasks in `Taskfile.yml`: `lint` (actionlint, shellcheck), `test` (the three scripts in `test/`), `validate-specs` (agent-skills launcher), `check`. There is no `format-check` and no `typecheck`. Deviation from the contract: `test` records the time of each script in `build/test/durations.txt`, not of each case. The scripts have no test runner and print `ok` or `FAIL` per case; bash 3.2 on macOS measures whole seconds only, which tells nothing about single cases.
 
 ### Releases
 

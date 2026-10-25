@@ -9,11 +9,17 @@ tasks:
       - actionlint
       - shellcheck {{.SCRIPTS}}
   test:
-    desc: The render and publish tests need Docker and spec-validator.
+    desc: The render and publish tests need Docker and spec-validator. Writes the time of each script to build/test/durations.txt.
     cmds:
-      - bash test/verify_test.sh
-      - bash test/publish_test.sh
-      - bash test/render_test.sh
+      - |
+        set -e
+        mkdir -p build/test
+        : >build/test/durations.txt
+        for script in test/verify_test.sh test/publish_test.sh test/render_test.sh; do
+          start=$(date +%s)
+          bash "$script"
+          echo "$script: $(($(date +%s) - start)) s" | tee -a build/test/durations.txt
+        done
   validate-specs:
     cmds:
       - .agents/skills/spec-system/bin/validate-specs
